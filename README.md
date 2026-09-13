@@ -8,20 +8,44 @@ https://chrisfgonzales.github.io/
 
 ## Purpose
 
-This repository separates authored work from research forks and presents four clear areas:
+This repository is the public front door for my developer and systems-architecture work. It keeps commercial work, active development directions, and research forks clearly separated so project authorship is easy to understand.
 
-- Featured work
-- Accessibility AI research
-- Ayla / local AI experiments
-- Development background
+### Portfolio pillars
 
-## Accessibility
+- **Dot Matrix Solutions** — production business and consulting work
+- **Ayla / Local AI Lab** — active local-AI, Android, RAG, voice, and orchestration experiments
+- **Accessibility AI Lab** — accessibility-focused AI and inclusive UX research
 
-The site uses semantic HTML, keyboard-friendly navigation, visible focus states, responsive layouts, reduced-motion support, and readable contrast.
+### Project taxonomy
 
-## Related
+- Built and led by me
+- Active development direction
+- Research direction
+- Research fork
+- Reference implementation / learning
+
+Research forks link to both my fork and the upstream project.
+
+## Accessibility baseline
+
+The site uses:
+
+- semantic HTML
+- a skip link
+- keyboard-friendly navigation
+- visible focus states
+- responsive layouts down to narrow mobile widths
+- reduced-motion support
+- readable contrast and hierarchy
+- no framework or JavaScript requirement for core content
+
+## Verification
 
 - Dot Matrix Solutions: https://dotmatrixsolutions.com
 - GitHub: https://github.com/chrisfgonzales
 - LinkedIn: https://www.linkedin.com/in/chrisfgonzales
 - Credly: https://www.credly.com/users/christopher-gonzales.cc675278
+
+## Deployment
+
+GitHub Pages publishes from the `main` branch for the special user-site repository `chrisfgonzales.github.io`.
