@@ -1,0 +1,1 @@
+User-agent: *\nAllow: /\n\nSitemap: https://chrisfgonzales.github.io/sitemap.xml\n
