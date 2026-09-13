@@ -4,42 +4,93 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Christopher Gonzales | Developer, Systems Architect, Accessibility + Applied AI</title>
-  <meta name="description" content="Christopher Gonzales is a developer and systems architect focused on applied AI, accessibility, automation, and practical technology systems.">
+  <meta name="description" content="Christopher Gonzales is a developer and systems architect focused on enterprise software, connected systems, accessibility-informed UX, automation, and applied AI.">
   <meta name="theme-color" content="#07131a">
   <meta property="og:title" content="Christopher Gonzales | Developer, Systems Architect, Accessibility + Applied AI">
-  <meta property="og:description" content="Portfolio, active development, accessibility AI research, local AI experiments, and technical work by Christopher Gonzales.">
+  <meta property="og:description" content="Selected work, accessibility AI research, local AI experiments, credentials, and development history.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://chrisfgonzales.github.io/">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/118977?v=4">
   <link rel="canonical" href="https://chrisfgonzales.github.io/">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Christopher Gonzales",
+    "url":"https://chrisfgonzales.github.io/",
+    "image":"https://avatars.githubusercontent.com/u/118977?v=4",
+    "jobTitle":"Developer and Systems Architect",
+    "sameAs":[
+      "https://github.com/chrisfgonzales",
+      "https://www.linkedin.com/in/chrisfgonzales",
+      "https://www.credly.com/users/christopher-gonzales.cc675278",
+      "https://dotmatrixsolutions.com"
+    ],
+    "knowsAbout":[
+      "C#",
+      ".NET",
+      "ASP.NET",
+      "SQL",
+      "Claris FileMaker",
+      "API integration",
+      "workflow automation",
+      "accessibility-informed design",
+      "artificial intelligence",
+      "systems integration"
+    ]
+  }
+  </script>
   <style>
-    :root{--bg:#07131a;--panel:#0c1d26;--panel2:#102833;--text:#eef8fb;--muted:#9fb8c2;--line:#24434f;--accent:#58d6f7;--accent2:#b1ecff;--good:#8ae6b0;--warn:#ffd782;--chip:#15323f}
+    :root{
+      --bg:#07131a;--panel:#0c1d26;--panel2:#102833;--text:#eef8fb;
+      --muted:#a8bec7;--line:#24434f;--accent:#58d6f7;--accent2:#b1ecff;
+      --good:#8ae6b0;--gold:#ffd782;--chip:#15323f;--max:1120px
+    }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:linear-gradient(180deg,#061117 0%,#07131a 35%,#091820 100%);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    body{margin:0;background:linear-gradient(180deg,#061117 0%,#07131a 34%,#091820 100%);color:var(--text);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
     a{color:var(--accent2)}
+    a:hover{text-decoration-thickness:2px}
     a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-    .wrap{width:min(1120px,calc(100% - 32px));margin:auto}
-    header{padding:24px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(7,19,26,.94);backdrop-filter:blur(10px);z-index:5}
+    .skip{position:absolute;left:-9999px;top:0}.skip:focus{left:12px;top:12px;background:#fff;color:#000;padding:10px 14px;border-radius:8px;z-index:100}
+    .wrap{width:min(var(--max),calc(100% - 32px));margin:auto}
+    header{padding:20px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(7,19,26,.94);backdrop-filter:blur(10px);z-index:10}
     nav{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
-    .brand{font-weight:800;letter-spacing:.03em;color:var(--text);text-decoration:none}
+    .brand{font-weight:850;letter-spacing:.02em;color:var(--text);text-decoration:none}
     .navlinks{display:flex;gap:16px;flex-wrap:wrap}.navlinks a{text-decoration:none;color:var(--muted)}.navlinks a:hover{color:var(--text)}
-    main{padding:56px 0 72px}
-    .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:34px;align-items:center;padding:34px 0 48px}
-    .kicker{color:var(--accent);text-transform:uppercase;letter-spacing:.14em;font-weight:800;font-size:.82rem}
-    h1{font-size:clamp(2.5rem,7vw,5.8rem);line-height:.95;margin:.25em 0 .3em;letter-spacing:-.04em}
-    .lede{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--muted);max-width:760px}
-    .hero-card,.card,.timeline-item{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px}
+    main{padding:46px 0 72px}
+    section{padding:34px 0;scroll-margin-top:88px}
+    .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:34px;align-items:center;padding-top:24px}
+    .kicker{color:var(--accent);text-transform:uppercase;letter-spacing:.14em;font-weight:850;font-size:.82rem}
+    h1{font-size:clamp(2.6rem,7vw,5.7rem);line-height:.96;margin:.24em 0 .3em;letter-spacing:-.045em;max-width:960px}
+    h2{font-size:clamp(1.75rem,3vw,2.55rem);line-height:1.15;margin:0 0 10px}
+    h3{line-height:1.25}
+    .lede{font-size:clamp(1.05rem,2vw,1.28rem);color:var(--muted);max-width:790px}
+    .section-copy{color:var(--muted);max-width:820px;margin:0 0 24px}
+    .hero-card,.card,.timeline-item,.credential{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px}
     .hero-card{padding:24px}.hero-card img{width:96px;height:96px;border-radius:50%;display:block;margin-bottom:16px}
-    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}.btn{display:inline-block;padding:12px 16px;border-radius:12px;text-decoration:none;border:1px solid var(--line);font-weight:700}.btn.primary{background:var(--accent);color:#06202a;border-color:transparent}.btn.secondary{color:var(--text);background:#0d232d}
-    section{padding:34px 0}section h2{font-size:clamp(1.7rem,3vw,2.6rem);margin:0 0 10px}.section-copy{color:var(--muted);max-width:780px;margin:0 0 24px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{padding:20px;min-width:0}.card h3{margin:.15rem 0 .35rem}.card p{color:var(--muted)}
-    .status{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--line);font-size:.8rem;font-weight:800;margin-bottom:10px}.dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.tag{font-size:.8rem;color:var(--accent2);background:#0b2029;border:1px solid var(--line);padding:5px 8px;border-radius:999px}
+    .hero-card p,.card p,.credential p{color:var(--muted)}
+    .buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 15px;border-radius:12px;text-decoration:none;border:1px solid var(--line);font-weight:760}
+    .btn.primary{background:var(--accent);color:#06202a;border-color:transparent}
+    .btn.secondary{color:var(--text);background:#0d232d}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .card{padding:20px;min-width:0}.card h3{margin:.15rem 0 .35rem}
+    .status{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:var(--chip);border:1px solid var(--line);font-size:.78rem;font-weight:850;margin-bottom:10px}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+    .status.authored .dot{background:var(--good)}.status.research .dot{background:var(--gold)}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .tag{font-size:.79rem;color:var(--accent2);background:#0b2029;border:1px solid var(--line);padding:5px 8px;border-radius:999px}
+    .links{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}.links a{font-weight:720}
+    .provenance{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+    .credentials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .credential{padding:22px}.credential h3{margin:.1rem 0 .4rem}
     .timeline{display:grid;gap:14px}.timeline-item{padding:18px}.timeline-item strong{display:block}.timeline-item span{color:var(--muted)}
-    .note{padding:16px 18px;border-left:4px solid var(--accent);background:#0b2029;border-radius:10px;color:var(--muted)}
+    .note{padding:16px 18px;border-left:4px solid var(--accent);background:#0b2029;border-radius:10px;color:var(--muted);margin-top:18px}
+    .principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.principle{border-top:2px solid var(--line);padding-top:12px}.principle strong{display:block}.principle span{color:var(--muted)}
     footer{border-top:1px solid var(--line);padding:26px 0 42px;color:var(--muted)}
-    .skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:#fff;color:#000;padding:8px;z-index:100}
-    @media(max-width:850px){.hero,.grid{grid-template-columns:1fr}.hero{padding-top:18px}header{position:static}}
+    @media(max-width:850px){header{position:static}.hero,.grid,.credentials,.principles{grid-template-columns:1fr}.hero{padding-top:10px}section{scroll-margin-top:18px}}
+    @media(max-width:520px){.wrap{width:min(100% - 22px,var(--max))}.navlinks{gap:11px}.navlinks a{padding:5px 0}.btn{width:100%}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
   </style>
 </head>
@@ -47,24 +98,29 @@
 <a class="skip" href="#main">Skip to content</a>
 <header>
   <div class="wrap">
-    <nav aria-label="Primary">
+    <nav aria-label="Primary navigation">
       <a class="brand" href="#top">Christopher Gonzales</a>
       <div class="navlinks">
-        <a href="#work">Work</a><a href="#labs">Labs</a><a href="#history">Background</a><a href="#contact">Contact</a>
+        <a href="#work">Work</a>
+        <a href="#labs">Research</a>
+        <a href="#credentials">Credentials</a>
+        <a href="#background">Background</a>
+        <a href="#contact">Connect</a>
       </div>
     </nav>
   </div>
 </header>
+
 <main id="main">
   <div class="wrap" id="top">
     <section class="hero" aria-labelledby="hero-title">
       <div>
         <div class="kicker">Developer · Systems Architect · Accessibility + Applied AI</div>
-        <h1 id="hero-title">I build practical technology that connects people, systems, and useful AI.</h1>
-        <p class="lede">I’m Christopher Gonzales, founder of Dot Matrix Solutions. My work spans enterprise software, connected workflows, communications, accessibility-informed UX, automation, and emerging AI systems.</p>
+        <h1 id="hero-title">Practical systems, useful AI, and technology built around the people using it.</h1>
+        <p class="lede">I’m Christopher Gonzales, founder of Dot Matrix Solutions. My work spans enterprise software, systems integration, connected workflows, communications, accessibility-informed UX, automation, and emerging AI systems.</p>
         <div class="buttons">
-          <a class="btn primary" href="https://dotmatrixsolutions.com">Visit Dot Matrix Solutions</a>
-          <a class="btn secondary" href="https://github.com/chrisfgonzales">GitHub profile</a>
+          <a class="btn primary" href="https://dotmatrixsolutions.com">Dot Matrix Solutions</a>
+          <a class="btn secondary" href="https://github.com/chrisfgonzales">GitHub</a>
           <a class="btn secondary" href="https://www.linkedin.com/in/chrisfgonzales">LinkedIn</a>
         </div>
       </div>
@@ -72,63 +128,140 @@
         <img src="https://avatars.githubusercontent.com/u/118977?v=4" alt="Christopher Gonzales">
         <strong>Christopher Gonzales</strong>
         <p>20+ years across software development, enterprise IT, systems integration, custom applications, and technology consulting.</p>
-        <div class="tags"><span class="tag">C# / .NET</span><span class="tag">SQL</span><span class="tag">FileMaker</span><span class="tag">APIs</span><span class="tag">AI</span><span class="tag">Accessibility</span></div>
+        <div class="tags">
+          <span class="tag">C# / .NET</span><span class="tag">SQL</span><span class="tag">FileMaker</span>
+          <span class="tag">APIs</span><span class="tag">Automation</span><span class="tag">AI</span><span class="tag">Accessibility</span>
+        </div>
       </aside>
     </section>
 
     <section id="work" aria-labelledby="work-title">
       <h2 id="work-title">Featured work</h2>
-      <p class="section-copy">Projects I directly build or lead. Research forks are separated below so authorship stays clear.</p>
+      <p class="section-copy">Work I directly build, lead, or shape. Research forks are separated into their own section so authorship stays explicit.</p>
       <div class="grid">
         <article class="card">
-          <div class="status"><span class="dot"></span>Built by me</div>
+          <div class="status authored"><span class="dot" aria-hidden="true"></span>Built and led by me</div>
           <h3>Dot Matrix Solutions</h3>
-          <p>Independent technology consulting focused on websites, connected workflows, custom software, communications, automation, accessibility-informed design, and practical AI integration.</p>
-          <div class="tags"><span class="tag">Production</span><span class="tag">Consulting</span><span class="tag">Automation</span></div>
-          <p><a href="https://dotmatrixsolutions.com">Open DMS →</a></p>
+          <p>Independent technology consulting connecting websites, business workflows, custom development, communications, automation, accessibility-informed design, and practical AI integration.</p>
+          <div class="tags"><span class="tag">Production</span><span class="tag">Consulting</span><span class="tag">Custom software</span></div>
+          <div class="links">
+            <a href="https://dotmatrixsolutions.com">Live site →</a>
+            <a href="https://github.com/chrisfgonzales/dartmaytricksolelutions">Repository →</a>
+          </div>
         </article>
+
         <article class="card">
-          <div class="status"><span class="dot"></span>Active development</div>
+          <div class="status authored"><span class="dot" aria-hidden="true"></span>Active development direction</div>
           <h3>Ayla / Local AI Lab</h3>
           <p>An evolving experimentation track around model orchestration, local inference, Android AI, RAG, document ingestion, voice, and tool use across local and cloud intelligence.</p>
           <div class="tags"><span class="tag">Local AI</span><span class="tag">Android</span><span class="tag">RAG</span><span class="tag">Orchestration</span></div>
         </article>
+
         <article class="card">
-          <div class="status"><span class="dot"></span>Research direction</div>
+          <div class="status authored"><span class="dot" aria-hidden="true"></span>Research direction</div>
           <h3>Accessibility AI Lab</h3>
-          <p>Research and prototype work exploring AI interaction for users with speech, motor, cognitive, and other accessibility needs.</p>
-          <div class="tags"><span class="tag">Inclusive UX</span><span class="tag">WCAG</span><span class="tag">Speech AI</span></div>
+          <p>Research and prototype work exploring AI interaction for users with speech, motor, cognitive, and other accessibility needs, with inclusive UX treated as architecture rather than decoration.</p>
+          <div class="tags"><span class="tag">Inclusive UX</span><span class="tag">WCAG</span><span class="tag">Speech AI</span><span class="tag">Adaptive interfaces</span></div>
         </article>
       </div>
     </section>
 
     <section id="labs" aria-labelledby="labs-title">
       <h2 id="labs-title">Research lab</h2>
-      <p class="section-copy">These are research forks and reference implementations, not claims of upstream authorship. I use them to study architecture, capabilities, and fit for future systems.</p>
+      <p class="section-copy">These repositories are explicitly labeled research forks. I use them to study capabilities and architecture. The upstream maintainers remain the authors of the underlying projects.</p>
       <div class="grid">
-        <article class="card"><div class="status">Research fork</div><h3>Project Euphonia</h3><p>Accessibility-focused speech research around personalized recognition for people whose speech may not be well served by conventional ASR.</p><p><a href="https://github.com/google/project-euphonia-app">Upstream →</a></p></article>
-        <article class="card"><div class="status">Research fork</div><h3>Recursive Language Models</h3><p>Exploration of long-context decomposition and model orchestration using programmable recursive reasoning patterns.</p><p><a href="https://github.com/alexzhang13/rlm">Upstream →</a></p></article>
-        <article class="card"><div class="status">Research fork</div><h3>Marker</h3><p>Document ingestion research for turning PDFs and office documents into structured Markdown, JSON, chunks, and other RAG-friendly formats.</p><p><a href="https://github.com/datalab-to/marker">Upstream →</a></p></article>
-        <article class="card"><div class="status">Research fork</div><h3>Google Home API Android</h3><p>Android device and home-automation research relevant to local agents and action-taking assistants.</p><p><a href="https://github.com/google-home/google-home-api-sample-app-android">Upstream →</a></p></article>
-        <article class="card"><div class="status">Research fork</div><h3>Step-Audio</h3><p>Voice and audio reasoning research for future multimodal and conversational AI experiments.</p></article>
-        <article class="card"><div class="status">Research fork</div><h3>Visual Code Space</h3><p>Android-native development environment research for mobile-first coding workflows and local experimentation.</p><p><a href="https://github.com/Visual-Code-Space/Visual-Code-Space">Upstream →</a></p></article>
+        <article class="card">
+          <div class="status research"><span class="dot" aria-hidden="true"></span>Research fork</div>
+          <h3>Project Euphonia</h3>
+          <p>Accessibility-focused speech research around personalized recognition for people whose speech may not be well served by conventional ASR.</p>
+          <div class="links"><a href="https://github.com/chrisfgonzales/project-euphonia-app">My fork →</a><a href="https://github.com/google/project-euphonia-app">Upstream →</a></div>
+          <div class="provenance">Upstream: <strong>google/project-euphonia-app</strong></div>
+        </article>
+
+        <article class="card">
+          <div class="status research"><span class="dot" aria-hidden="true"></span>Research fork</div>
+          <h3>Recursive Language Models</h3>
+          <p>Long-context decomposition and model orchestration research using programmable recursive reasoning patterns.</p>
+          <div class="links"><a href="https://github.com/chrisfgonzales/rlm-mit-opensource">My fork →</a><a href="https://github.com/alexzhang13/rlm">Upstream →</a></div>
+          <div class="provenance">Upstream: <strong>alexzhang13/rlm</strong></div>
+        </article>
+
+        <article class="card">
+          <div class="status research"><span class="dot" aria-hidden="true"></span>Research fork</div>
+          <h3>Marker</h3>
+          <p>Document-ingestion research for converting PDFs and office documents into structured formats suitable for search, extraction, and RAG pipelines.</p>
+          <div class="links"><a href="https://github.com/chrisfgonzales/marker">My fork →</a><a href="https://github.com/datalab-to/marker">Upstream →</a></div>
+          <div class="provenance">Upstream: <strong>datalab-to/marker</strong></div>
+        </article>
+
+        <article class="card">
+          <div class="status research"><span class="dot" aria-hidden="true"></span>Research fork</div>
+          <h3>Google Home API Android</h3>
+          <p>Android device and home-automation research relevant to action-taking assistants and connected environments.</p>
+          <div class="links"><a href="https://github.com/chrisfgonzales/google-home-api-sample-app-android">My fork →</a><a href="https://github.com/google-home/google-home-api-sample-app-android">Upstream →</a></div>
+          <div class="provenance">Upstream: <strong>google-home/google-home-api-sample-app-android</strong></div>
+        </article>
+
+        <article class="card">
+          <div class="status research"><span class="dot" aria-hidden="true"></span>Research fork</div>
+          <h3>Step-Audio-R1</h3>
+          <p>Voice and audio reasoning research for future multimodal and conversational AI experiments.</p>
+          <div class="links"><a href="https://github.com/chrisfgonzales/step-audio-r1">My fork →</a><a href="https://github.com/stepfun-ai/Step-Audio-R1">Upstream →</a></div>
+          <div class="provenance">Upstream: <strong>stepfun-ai/Step-Audio-R1</strong></div>
+        </article>
+
+        <article class="card">
+          <div class="status research"><span class="dot" aria-hidden="true"></span>Research fork</div>
+          <h3>Visual Code Space</h3>
+          <p>Android-native development environment research for mobile-first coding workflows and local experimentation.</p>
+          <div class="links"><a href="https://github.com/chrisfgonzales/Visual-Code-Space">My fork →</a><a href="https://github.com/Visual-Code-Space/Visual-Code-Space">Upstream →</a></div>
+          <div class="provenance">Upstream: <strong>Visual-Code-Space/Visual-Code-Space</strong></div>
+        </article>
       </div>
-      <p class="note">Portfolio rule: if I did not author the upstream project, it is labeled as research, reference, or fork. That distinction is intentional.</p>
+      <p class="note"><strong>Portfolio rule:</strong> if I did not author the upstream project, it is labeled as a research fork or reference implementation. The distinction is deliberate.</p>
     </section>
 
-    <section id="history" aria-labelledby="history-title">
-      <h2 id="history-title">Development background</h2>
-      <p class="section-copy">A long-running mix of software engineering, enterprise systems, integration work, and small-business technology.</p>
+    <section id="credentials" aria-labelledby="credentials-title">
+      <h2 id="credentials-title">Credentials and verification</h2>
+      <p class="section-copy">Professional credentials are linked to their verification sources rather than presented as unverified résumé claims.</p>
+      <div class="credentials">
+        <article class="credential">
+          <div class="status authored"><span class="dot" aria-hidden="true"></span>Credential</div>
+          <h3>Claris FileMaker Pro Associate</h3>
+          <p>App Developer for Claris FileMaker Pro Associate credential, supporting the FileMaker and custom business application work represented across Dot Matrix Solutions.</p>
+          <div class="links"><a href="https://www.credly.com/users/christopher-gonzales.cc675278">View verified credentials on Credly →</a></div>
+        </article>
+        <article class="credential">
+          <div class="status"><span class="dot" aria-hidden="true"></span>Credential profile</div>
+          <h3>Credly</h3>
+          <p>Public verification profile for issued professional badges and credentials.</p>
+          <div class="links"><a href="https://www.credly.com/users/christopher-gonzales.cc675278">Open Credly profile →</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="background" aria-labelledby="background-title">
+      <h2 id="background-title">Development background</h2>
+      <p class="section-copy">A long-running mix of enterprise software engineering, integration work, operational technology, and small-business systems.</p>
       <div class="timeline">
-        <div class="timeline-item"><strong>Enterprise and custom development</strong><span>C#, ASP.NET, .NET, SQL, JavaScript, APIs, integration work, business systems, and modernization.</span></div>
-        <div class="timeline-item"><strong>Communications and workflow integration</strong><span>Twilio SMS integration, connected business processes, automation, and customer-facing systems.</span></div>
+        <div class="timeline-item"><strong>Enterprise and custom development</strong><span>C#, ASP.NET, .NET, SQL, JavaScript, business applications, APIs, systems integration, and modernization.</span></div>
+        <div class="timeline-item"><strong>Communications and workflow integration</strong><span>Twilio SMS integration, connected business processes, communications systems, automation, and customer-facing workflows.</span></div>
         <div class="timeline-item"><strong>Applied AI and accessibility</strong><span>Current work centers on making AI useful in real workflows while keeping accessibility, clarity, and human control in the design.</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="principles-title">
+      <h2 id="principles-title">How I frame the work</h2>
+      <div class="principles">
+        <div class="principle"><strong>Useful over theatrical</strong><span>AI and automation should remove friction or improve capability, not exist just to decorate a pitch.</span></div>
+        <div class="principle"><strong>Accessibility belongs in the architecture</strong><span>Keyboard access, reduced motion, semantics, readable hierarchy, and cognitive clarity are baseline engineering concerns.</span></div>
+        <div class="principle"><strong>Provenance matters</strong><span>Authored work, active experiments, forks, and reference implementations should be labeled so a visitor can tell which is which.</span></div>
       </div>
     </section>
 
     <section id="contact" aria-labelledby="contact-title">
       <h2 id="contact-title">Connect</h2>
-      <p class="section-copy">For consulting, collaboration, or technical work, start with Dot Matrix Solutions or my professional profiles.</p>
+      <p class="section-copy">For consulting, collaboration, or technical work, start with Dot Matrix Solutions or one of my professional profiles.</p>
       <div class="buttons">
         <a class="btn primary" href="https://dotmatrixsolutions.com">Dot Matrix Solutions</a>
         <a class="btn secondary" href="https://github.com/chrisfgonzales">GitHub</a>
@@ -138,6 +271,9 @@
     </section>
   </div>
 </main>
-<footer><div class="wrap">© 2026 Christopher Gonzales. Built as a lightweight, accessible GitHub Pages portfolio.</div></footer>
+
+<footer>
+  <div class="wrap">© 2026 Christopher Gonzales. Lightweight, accessible, and intentionally explicit about project provenance.</div>
+</footer>
 </body>
 </html>
