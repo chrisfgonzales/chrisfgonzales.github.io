@@ -54,4 +54,6 @@ GitHub Pages deploys the portfolio and VibeOS through the `Validate and Deploy V
 
 VibeOS source lives in [`vibeos/src`](vibeos/src): the dependency-free PWA is in `web/`, and
 the Android WebView shell is in `android/`. GitHub Actions validates and deploys the PWA from
-the source directory; a `vibeos-v<version>` tag creates the debug APK release.
+the source directory; a `vibeos-v<version>` tag creates the debug APK release. VibeOS is
+local-first: workspaces, memory, and flows remain in the current browser or app profile until
+the user explicitly exports or shares them.

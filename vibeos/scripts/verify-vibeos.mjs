@@ -23,13 +23,40 @@ for (const asset of assets.filter(asset => asset !== 'sw.js')) {
 }
 
 const parsedManifest = JSON.parse(manifest);
-if (parsedManifest.name !== 'VibeOS' || parsedManifest.start_url !== './') {
-  throw new Error('The web manifest must identify VibeOS and use a relative start URL.');
+if (
+  parsedManifest.name !== 'VibeOS' ||
+  parsedManifest.start_url !== './' ||
+  parsedManifest.display !== 'standalone' ||
+  !parsedManifest.theme_color ||
+  !parsedManifest.background_color ||
+  !Array.isArray(parsedManifest.icons) ||
+  !parsedManifest.icons.some(icon => icon.src === 'icon.svg')
+) {
+  throw new Error('The web manifest must define VibeOS identity, standalone launch, theme, background, and icon.');
 }
 
-const syntaxCheck = spawnSync(process.execPath, ['--check', resolve(web, 'app.js')], { stdio: 'inherit' });
-if (syntaxCheck.status !== 0) {
-  process.exit(syntaxCheck.status ?? 1);
+for (const requiredMarkup of ['<main id="main"', 'id="installBtn"', 'id="dialog"', 'id="quickAction"']) {
+  if (!html.includes(requiredMarkup)) {
+    throw new Error(`The app shell is missing required markup: ${requiredMarkup}`);
+  }
+}
+
+for (const requiredWorkerFeature of [
+  "self.addEventListener('install'",
+  "self.addEventListener('activate'",
+  "self.addEventListener('fetch'",
+  'caches.open',
+]) {
+  if (!serviceWorker.includes(requiredWorkerFeature)) {
+    throw new Error(`The service worker is missing required offline behavior: ${requiredWorkerFeature}`);
+  }
+}
+
+for (const script of ['app.js', 'sw.js']) {
+  const syntaxCheck = spawnSync(process.execPath, ['--check', resolve(web, script)], { stdio: 'inherit' });
+  if (syntaxCheck.status !== 0) {
+    process.exit(syntaxCheck.status ?? 1);
+  }
 }
 
 console.log('VibeOS web source validation passed.');
