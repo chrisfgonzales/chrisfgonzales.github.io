@@ -40,10 +40,8 @@ jobs:
           distribution: temurin
           java-version: "17"
       - uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "9.6.0"
       - name: Build Android debug APK
-        run: gradle -p vibeos/src/android assembleDebug --stacktrace
+        run: ./vibeos/src/android/gradlew -p vibeos/src/android assembleDebug --stacktrace
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:
