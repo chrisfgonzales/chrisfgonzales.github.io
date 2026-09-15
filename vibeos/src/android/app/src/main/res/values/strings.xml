@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">VibeOS</string>
+  <string name="accessibility_service_description">VibeOS can use the foreground app name as local context for accessibility-focused workspace generation. It does not read screen contents.</string>
+</resources>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111214">
+  <title>VibeOS</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app" class="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">Android Generative Shell · v1</div>
+        <h1>VibeOS</h1>
+        <div class="tagline">Describe the vibe. The system composes itself.</div>
+      </div>
+      <button id="modeBtn" class="pill">Mode: Normal</button>
+    </header>
+
+    <main id="main">
+      <section id="vibeView" class="view active">
+        <div class="composer card">
+          <label for="intentInput">What do you want your world to do?</label>
+          <textarea id="intentInput" rows="3" placeholder="Prepare me for GovBidPro tomorrow."></textarea>
+          <div class="actions">
+            <button id="runIntent" class="primary">Generate workspace</button>
+            <button id="installBtn">Install VibeOS</button>
+          </div>
+          <div id="intentStatus" class="status" aria-live="polite"></div>
+        </div>
+
+        <section>
+          <h2>Workspaces</h2>
+          <div id="workspaceList" class="grid"></div>
+        </section>
+      </section>
+
+      <section id="memoryView" class="view">
+        <div class="row between">
+          <h2>Memory</h2>
+          <button id="addMemoryBtn">Add memory</button>
+        </div>
+        <div class="card filters">
+          <input id="memorySearch" type="search" placeholder="Search memory">
+          <select id="memoryFilter">
+            <option value="all">All types</option>
+            <option value="project">Projects</option>
+            <option value="person">People</option>
+            <option value="decision">Decisions</option>
+            <option value="preference">Preferences</option>
+            <option value="unfinished">Unfinished</option>
+          </select>
+        </div>
+        <div id="memoryList" class="stack"></div>
+      </section>
+
+      <section id="flowsView" class="view">
+        <div class="row between">
+          <h2>Flows</h2>
+          <button id="addFlowBtn">Create flow</button>
+        </div>
+        <div id="flowList" class="stack"></div>
+      </section>
+
+      <section id="aylaView" class="view">
+        <h2>Ayla</h2>
+        <div class="card">
+          <label for="aylaInput">Command VibeOS</label>
+          <input id="aylaInput" placeholder="Switch to ADHD mode">
+          <div class="actions"><button id="aylaRun" class="primary">Run command</button></div>
+        </div>
+        <div id="activityList" class="stack"></div>
+      </section>
+
+      <section id="settingsView" class="view">
+        <h2>Settings</h2>
+        <div class="card stack compact">
+          <label>Accessibility mode
+            <select id="modeSelect">
+              <option>Normal</option>
+              <option>ADHD</option>
+              <option>Fine Motor</option>
+              <option>Low Stimulation</option>
+              <option>High Contrast</option>
+            </select>
+          </label>
+          <button id="exportBtn">Export VibeOS data</button>
+          <label class="fileButton">Import VibeOS data
+            <input id="importInput" type="file" accept="application/json">
+          </label>
+          <button id="resetBtn" class="danger">Reset local data</button>
+        </div>
+
+        <h3>Connectors</h3>
+        <div class="stack">
+          <div class="card row between"><span>Google Calendar</span><span class="muted">Not connected</span></div>
+          <div class="card row between"><span>Gmail</span><span class="muted">Not connected</span></div>
+          <div class="card row between"><span>GitHub</span><span class="muted">Not connected</span></div>
+          <div class="card row between"><span>Obsidian / Files</span><span class="muted">Native bridge needed</span></div>
+        </div>
+
+        <h3>Privacy</h3>
+        <div class="card muted">
+          VibeOS v1 is local-first. Core state stays in this browser profile unless you explicitly export it.
+          Cloud sync, encryption-at-rest, Android notification access, AccessibilityService, and direct filesystem
+          access are not claimed by this PWA.
+        </div>
+      </section>
+    </main>
+
+    <button id="betterBtn" class="better">✦ MAKE IT BETTER</button>
+
+    <nav class="nav" aria-label="Primary">
+      <button data-view="vibeView" class="active">Vibe</button>
+      <button data-view="memoryView">Memory</button>
+      <button data-view="flowsView">Flows</button>
+      <button data-view="aylaView">Ayla</button>
+      <button data-view="settingsView">Settings</button>
+    </nav>
+
+    <dialog id="dialog">
+      <form method="dialog" id="dialogForm" class="dialogCard">
+        <div id="dialogBody"></div>
+        <div class="actions">
+          <button value="cancel">Close</button>
+        </div>
+      </form>
+    </dialog>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

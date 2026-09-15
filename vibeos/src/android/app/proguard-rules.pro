@@ -1,0 +1,1 @@
+-keepclassmembers class com.dotmatrixsolutions.vibeos.MainActivity$VibeBridge { @android.webkit.JavascriptInterface <methods>; }

@@ -48,4 +48,10 @@ The site uses:
 
 ## Deployment
 
-GitHub Pages publishes from the `main` branch for the special user-site repository `chrisfgonzales.github.io`.
+GitHub Pages deploys the portfolio and VibeOS through the `Validate and Deploy VibeOS PWA` workflow.
+
+### VibeOS
+
+VibeOS source lives in [`vibeos/src`](vibeos/src): the dependency-free PWA is in `web/`, and
+the Android WebView shell is in `android/`. GitHub Actions validates and deploys the PWA from
+the source directory; a `vibeos-v<version>` tag creates the debug APK release.
