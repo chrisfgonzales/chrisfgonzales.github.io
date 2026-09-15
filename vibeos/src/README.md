@@ -19,8 +19,8 @@ Core VibeOS data stays local unless the user explicitly exports or shares it. Na
 `com.dotmatrixsolutions.vibeos`
 
 ## Build requirements
-- Android Gradle Plugin 9.4.0
-- Gradle 9.6.0
+- Android Gradle Plugin 8.5.2
+- Gradle 8.7
 - JDK 17
 - compileSdk / targetSdk 36
 - minSdk 26
@@ -37,3 +37,6 @@ Tag a commit as `vibeos-v<version>` to publish the installable APK as a GitHub R
 `web/` is the source of truth for the shared interface. The Android build synchronizes those
 assets to its WebView bundle before `preBuild`, so do not edit generated files under
 `android/app/src/main/assets/www/`.
+
+Build the Android app from the repository root with:
+`./vibeos/src/android/gradlew -p vibeos/src/android assembleDebug`
