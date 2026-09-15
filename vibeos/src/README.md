@@ -1,19 +1,21 @@
-# VibeOS v1.0.0
+# VibeOS v2
 
 VibeOS is a local-first, no-code generative operating shell for Android.
 
 ## Product
-- Vibe workspace generator
-- persistent Memory
-- natural-language Flows
-- Ayla local command surface
-- accessibility modes: Normal, ADHD, Fine Motor, Low Stimulation, High Contrast
-- local JSON import/export
-- installable/offline PWA
+- task-first workspaces, local Memory, and user-run Flows
+- versioned IndexedDB state with v1 migration and validated JSON import/export
+- responsive compact-phone, tablet, and desktop-PWA navigation
+- light, dark, high-contrast, and reduced-motion preferences
+- installable/offline PWA with cache updates and an offline fallback
 - native Android shell with notification context, foreground-app accessibility context, Android settings shortcuts, sharing, file picker, vibration, and text-to-speech
 
 ## Privacy
-Core VibeOS data stays local unless the user explicitly exports or shares it. Native notification and foreground-app context are stored only in app-local Android preferences and require explicit system permission.
+Core VibeOS data stays local unless the user explicitly exports or shares it. VibeOS has no
+account, cloud sync, analytics, or live connectors. Native notification
+and foreground-app context are stored only in app-local Android preferences, require explicit
+system permission, and are bounded; notification summaries are cleared when notification access
+disconnects.
 
 ## Android package
 `com.dotmatrixsolutions.vibeos`
@@ -40,3 +42,10 @@ assets to its WebView bundle before `preBuild`, so do not edit generated files u
 
 Build the Android app from the repository root with:
 `./vibeos/src/android/gradlew -p vibeos/src/android assembleDebug`
+
+Run the web-source verification with:
+`node vibeos/scripts/verify-vibeos.mjs`
+
+The GitHub workflows use this same Gradle wrapper and run Android lint before assembling the
+debug APK. The current AGP 8.5.2 build emits a compatibility warning for compileSdk 36 but
+builds successfully; update AGP and the wrapper together after validating a supported pair.

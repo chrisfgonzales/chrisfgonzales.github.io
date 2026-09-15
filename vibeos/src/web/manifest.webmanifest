@@ -1,12 +1,17 @@
 {
+  "id": "./",
   "name": "VibeOS",
   "short_name": "VibeOS",
+  "description": "A local-first workspace for focus, memory, and routines.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
   "background_color": "#111214",
   "theme_color": "#111214",
-  "description": "A local-first no-code generative operating shell for Android.",
   "icons": [
     {
       "src": "icon.svg",
