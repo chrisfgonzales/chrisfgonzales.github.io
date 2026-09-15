@@ -1,11 +1,15 @@
-name: Build and Publish VibeOS
+name: Release VibeOS APK
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing VibeOS release tag, for example vibeos-v1.0.0
+        required: true
+        type: string
   push:
-    paths:
-      - "vibeos/source/chunks/**"
-      - ".github/workflows/vibeos-release.yml"
+    tags:
+      - "vibeos-v*"
 
 permissions:
   contents: write
@@ -13,79 +17,29 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Reconstruct source archive
-        id: reconstruct
-        shell: bash
-        run: |
-          echo "ready=false" >> "$GITHUB_OUTPUT"
-          cat vibeos/source/chunks/part-*.b64 > /tmp/vibeos.b64
-          if ! base64 -d /tmp/vibeos.b64 > /tmp/vibeos.zip; then
-            echo "VibeOS source archive is not valid base64 yet; skipping publish."
-            exit 0
-          fi
-          rm -rf /tmp/vibeos-src
-          mkdir -p /tmp/vibeos-src
-          if ! unzip -q /tmp/vibeos.zip -d /tmp/vibeos-src; then
-            echo "VibeOS source archive is not a valid zip yet; skipping publish."
-            exit 0
-          fi
-          test -f /tmp/vibeos-src/vibeos-release/web/index.html
-          test -f /tmp/vibeos-src/vibeos-release/android/settings.gradle.kts
-          echo "ready=true" >> "$GITHUB_OUTPUT"
-
-      - name: Publish web app into GitHub Pages path
-        if: steps.reconstruct.outputs.ready == 'true'
-        shell: bash
-        run: |
-          mkdir -p vibeos
-          cp /tmp/vibeos-src/vibeos-release/web/index.html vibeos/index.html
-          cp /tmp/vibeos-src/vibeos-release/web/app.js vibeos/app.js
-          cp /tmp/vibeos-src/vibeos-release/web/styles.css vibeos/styles.css
-          cp /tmp/vibeos-src/vibeos-release/web/manifest.webmanifest vibeos/manifest.webmanifest
-          cp /tmp/vibeos-src/vibeos-release/web/sw.js vibeos/sw.js
-          cp /tmp/vibeos-src/vibeos-release/web/icon.svg vibeos/icon.svg
-          cp /tmp/vibeos-src/vibeos-release/web/privacy.html vibeos/privacy.html
-
-      - name: Set up Java 17
-        if: steps.reconstruct.outputs.ready == 'true'
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate web source
+        run: node vibeos/scripts/verify-vibeos.mjs
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
-
-      - name: Set up Android SDK
-        if: steps.reconstruct.outputs.ready == 'true'
-        uses: android-actions/setup-android@v3
-
-      - name: Set up Gradle
-        if: steps.reconstruct.outputs.ready == 'true'
-        uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: current
-
+          gradle-version: "9.6.0"
       - name: Build Android APK
-        if: steps.reconstruct.outputs.ready == 'true'
-        shell: bash
+        run: gradle -p vibeos/src/android assembleDebug --stacktrace
+      - name: Create or update GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          gradle -p /tmp/vibeos-src/vibeos-release/android assembleDebug --stacktrace
-          mkdir -p vibeos/download
-          cp /tmp/vibeos-src/vibeos-release/android/app/build/outputs/apk/debug/app-debug.apk vibeos/download/VibeOS-v1.apk
-
-      - name: Publish web app and APK
-        if: steps.reconstruct.outputs.ready == 'true'
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add vibeos/index.html vibeos/app.js vibeos/styles.css vibeos/manifest.webmanifest vibeos/sw.js vibeos/icon.svg vibeos/privacy.html vibeos/download/VibeOS-v1.apk
-          if git diff --cached --quiet; then
-            echo "No release changes to publish."
-          else
-            git commit -m "Publish VibeOS v1 web app and Android APK"
-            git push
-          fi
+          gh release view "$RELEASE_TAG" >/dev/null 2>&1 ||
+            gh release create "$RELEASE_TAG" --title "VibeOS ${RELEASE_TAG#vibeos-v}" --generate-notes
+          gh release upload "$RELEASE_TAG" vibeos/src/android/app/build/outputs/apk/debug/app-debug.apk#VibeOS.apk --clobber

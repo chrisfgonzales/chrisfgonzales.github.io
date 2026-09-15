@@ -1,0 +1,61 @@
+name: Validate and Deploy VibeOS PWA
+
+on:
+  pull_request:
+    paths:
+      - "vibeos/src/**"
+      - "vibeos/scripts/**"
+      - ".github/workflows/vibeos-pages.yml"
+  push:
+    branches: [main]
+    paths:
+      - "vibeos/src/**"
+      - "vibeos/scripts/**"
+      - ".github/workflows/vibeos-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "vibeos-pages"
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate web source
+        run: node vibeos/scripts/verify-vibeos.mjs
+      - name: Stage GitHub Pages site
+        run: node vibeos/scripts/stage-pages.mjs
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "9.6.0"
+      - name: Build Android debug APK
+        run: gradle -p vibeos/src/android assembleDebug --stacktrace
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: vibeos/.pages
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
