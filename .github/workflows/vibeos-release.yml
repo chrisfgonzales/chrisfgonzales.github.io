@@ -31,11 +31,8 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "9.6.0"
       - name: Build Android APK
-        run: gradle -p vibeos/src/android assembleDebug --stacktrace
+        run: ./vibeos/src/android/gradlew -p vibeos/src/android assembleDebug --stacktrace
       - name: Create or update GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
