@@ -1,6 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<rect width="512" height="512" rx="110" fill="#111214"/>
-<path d="M64 300c70-120 126-120 196 0s126 120 188 0" fill="none" stroke="#8fd3ff" stroke-width="34" stroke-linecap="round"/>
-<circle cx="256" cy="210" r="66" fill="#cab7ff"/>
-<circle cx="256" cy="210" r="30" fill="#111214"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">VibeOS</title>
+  <style>
+    :root { color-scheme: light dark; --background: #111214; --wave: #8fd3ff; --orb: #cab7ff; }
+    @media (prefers-color-scheme: light) {
+      :root { --background: #f7f8fc; --wave: #075985; --orb: #6d28d9; }
+    }
+  </style>
+  <rect width="512" height="512" rx="110" fill="var(--background)"/>
+  <path d="M64 300c70-120 126-120 196 0s126 120 188 0" fill="none" stroke="var(--wave)" stroke-width="34" stroke-linecap="round"/>
+  <circle cx="256" cy="210" r="66" fill="var(--orb)"/>
+  <circle cx="256" cy="210" r="30" fill="var(--background)"/>
 </svg>

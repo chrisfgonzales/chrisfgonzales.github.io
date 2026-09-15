@@ -13,7 +13,10 @@ VibeOS is a local-first, no-code generative operating shell for Android.
 - native Android shell with notification context, foreground-app accessibility context, Android settings shortcuts, sharing, file picker, vibration, and text-to-speech
 
 ## Privacy
-Core VibeOS data stays local unless the user explicitly exports or shares it. Native notification and foreground-app context are stored only in app-local Android preferences and require explicit system permission.
+Core VibeOS data stays local unless the user explicitly exports or shares it. Native notification
+and foreground-app context are stored only in app-local Android preferences, require explicit
+system permission, and are bounded; notification summaries are cleared when notification access
+disconnects.
 
 ## Android package
 `com.dotmatrixsolutions.vibeos`
