@@ -42,12 +42,12 @@ for (const requiredMarkup of ['<main id="main"', 'id="installBtn"', 'id="dialog"
 }
 
 for (const requiredWorkerFeature of [
-  "self.addEventListener('install'",
-  "self.addEventListener('activate'",
-  "self.addEventListener('fetch'",
-  'caches.open',
+  /addEventListener\(\s*['"]install['"]/,
+  /addEventListener\(\s*['"]activate['"]/,
+  /addEventListener\(\s*['"]fetch['"]/,
+  /caches\.open/,
 ]) {
-  if (!serviceWorker.includes(requiredWorkerFeature)) {
+  if (!requiredWorkerFeature.test(serviceWorker)) {
     throw new Error(`The service worker is missing required offline behavior: ${requiredWorkerFeature}`);
   }
 }
