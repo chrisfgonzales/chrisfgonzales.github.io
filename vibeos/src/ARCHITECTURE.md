@@ -1,7 +1,9 @@
 # Architecture
 
 ## Web core
-Static local-first HTML/CSS/JavaScript application. State is persisted in localStorage. Service worker provides offline caching when hosted over HTTP(S).
+Static local-first HTML/CSS/JavaScript application. Versioned user state is persisted in IndexedDB,
+with one-time migration from the v1 localStorage state. The service worker provides offline caching
+when hosted over HTTP(S).
 
 ## Android shell
 A native Java Activity hosts the exact web core from bundled assets in WebView. The shell permits
