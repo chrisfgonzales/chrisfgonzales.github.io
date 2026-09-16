@@ -24,6 +24,7 @@ Core VibeOS data stays local unless the user explicitly exports or shares it. Na
 - JDK 17
 - compileSdk / targetSdk 36
 - minSdk 26
+- network access to `dl.google.com` (Google Maven host for Android Gradle Plugin artifacts)
 
 ## Hosted PWA
 The GitHub Pages workflow deploys the `web/` directory directly at:
