@@ -7,6 +7,7 @@ const root = resolve(import.meta.dirname, '..', 'src');
 const web = resolve(root, 'web');
 const androidActivityPath = resolve(root, 'android', 'app', 'src', 'main', 'java', 'com', 'dotmatrixsolutions', 'vibeos', 'MainActivity.java');
 const androidBuildPath = resolve(root, 'android', 'app', 'build.gradle.kts');
+const androidPropertiesPath = resolve(root, 'android', 'gradle.properties');
 const assets = ['app.js', 'icon.svg', 'index.html', 'manifest.webmanifest', 'privacy.html', 'styles.css', 'sw.js'];
 const androidPluginMarkerUrl = 'https://dl.google.com/dl/android/maven2/com/android/application/com.android.application.gradle.plugin/8.5.2/com.android.application.gradle.plugin-8.5.2.pom';
 
@@ -33,12 +34,13 @@ for (const asset of assets) {
   await access(resolve(web, asset));
 }
 
-const [html, manifest, serviceWorker, androidActivity, androidBuild] = await Promise.all([
+const [html, manifest, serviceWorker, androidActivity, androidBuild, androidProperties] = await Promise.all([
   readFile(resolve(web, 'index.html'), 'utf8'),
   readFile(resolve(web, 'manifest.webmanifest'), 'utf8'),
   readFile(resolve(web, 'sw.js'), 'utf8'),
   readFile(androidActivityPath, 'utf8'),
   readFile(androidBuildPath, 'utf8'),
+  readFile(androidPropertiesPath, 'utf8'),
 ]);
 
 for (const asset of assets.filter(asset => asset !== 'sw.js')) {
@@ -94,6 +96,10 @@ for (const requiredAndroidAssetLoaderFeature of [
   if (!source.includes(requiredAndroidAssetLoaderFeature)) {
     throw new Error(`The Android shell is missing required secure asset-loader behavior: ${requiredAndroidAssetLoaderFeature}`);
   }
+}
+
+if (!/^android\.useAndroidX=true$/m.test(androidProperties)) {
+  throw new Error('The Android shell must enable AndroidX for WebViewAssetLoader.');
 }
 
 if (androidActivity.includes('file:///android_asset')) {
