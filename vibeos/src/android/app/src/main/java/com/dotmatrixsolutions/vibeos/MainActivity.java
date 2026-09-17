@@ -19,14 +19,19 @@ import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.webkit.CookieManager;
+import android.webkit.RenderProcessGoneDetail;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.webkit.WebViewAssetLoader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,7 +46,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static final int MAX_CLIPBOARD_TEXT_LENGTH = 50_000;
     private static final int MAX_SPEECH_TEXT_LENGTH = 4_000;
     private static final long FOREGROUND_CONTEXT_MAX_AGE_MS = 5 * 60 * 1000L;
-    private static final String ASSET_ROOT = "file:///android_asset/www/";
+    private static final String APP_ASSET_PATH = "/assets/www/";
+    private static final String APP_ENTRY_URL = "https://" + WebViewAssetLoader.DEFAULT_DOMAIN
+            + APP_ASSET_PATH + "index.html";
     private static final String LAST_ACTION = "last_native_action";
     private static final String LAST_ACTION_ERROR = "last_native_action_error";
 
@@ -60,7 +67,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         webView = new WebView(this);
         setContentView(webView);
         configureWebView(webView);
-        webView.loadUrl(ASSET_ROOT + "index.html");
+        webView.loadUrl(APP_ENTRY_URL);
     }
 
     private void configureWebView(WebView view) {
@@ -78,16 +85,41 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         settings.setGeolocationEnabled(false);
         settings.setSaveFormData(false);
 
+        WebViewAssetLoader assetLoader = new WebViewAssetLoader.Builder()
+                .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
+                .build();
+
         CookieManager.getInstance().setAcceptCookie(false);
         CookieManager.getInstance().setAcceptThirdPartyCookies(view, false);
         view.addJavascriptInterface(new VibeBridge(), "VibeAndroid");
         view.setWebViewClient(new WebViewClient() {
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView target,
+                    WebResourceRequest request) {
+                return request == null ? null : assetLoader.shouldInterceptRequest(request.getUrl());
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView target, WebResourceRequest request) {
                 if (request == null || !request.isForMainFrame()) return false;
                 Uri uri = request.getUrl();
                 if (isTrustedAssetUri(uri)) return false;
                 openExternalUri(uri);
+                return true;
+            }
+
+            @Override
+            public boolean onRenderProcessGone(WebView target, RenderProcessGoneDetail detail) {
+                Log.e(TAG, "WebView renderer exited; closing the affected activity."
+                        + (detail != null && detail.didCrash() ? " Renderer crashed." : ""));
+                if (target == webView) webView = null;
+                if (target.getParent() instanceof ViewGroup) {
+                    ((ViewGroup) target.getParent()).removeView(target);
+                }
+                target.destroy();
+                Toast.makeText(MainActivity.this,
+                        "VibeOS needs to restart after a WebView failure.", Toast.LENGTH_LONG).show();
+                finish();
                 return true;
             }
         });
@@ -115,13 +147,15 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     private boolean isTrustedAssetUri(Uri uri) {
-        if (uri == null || !"file".equalsIgnoreCase(uri.getScheme()) || uri.getAuthority() != null) {
+        if (uri == null || !"https".equalsIgnoreCase(uri.getScheme())
+                || !WebViewAssetLoader.DEFAULT_DOMAIN.equalsIgnoreCase(uri.getHost())
+                || uri.getUserInfo() != null || uri.getPort() != -1) {
             return false;
         }
         String path = uri.getPath();
-        return "/android_asset/www/".equals(path)
-                || "/android_asset/www/index.html".equals(path)
-                || "/android_asset/www/privacy.html".equals(path);
+        return APP_ASSET_PATH.equals(path)
+                || (APP_ASSET_PATH + "index.html").equals(path)
+                || (APP_ASSET_PATH + "privacy.html").equals(path);
     }
 
     private void openExternalUri(Uri uri) {

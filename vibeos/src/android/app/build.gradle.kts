@@ -37,3 +37,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+
+dependencies {
+    implementation("androidx.webkit:webkit:1.17.0")
+}
