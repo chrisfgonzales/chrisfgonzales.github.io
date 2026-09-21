@@ -8,6 +8,7 @@ const web = resolve(root, 'web');
 const androidActivityPath = resolve(root, 'android', 'app', 'src', 'main', 'java', 'com', 'dotmatrixsolutions', 'vibeos', 'MainActivity.java');
 const androidBuildPath = resolve(root, 'android', 'app', 'build.gradle.kts');
 const androidPropertiesPath = resolve(root, 'android', 'gradle.properties');
+const androidManifestPath = resolve(root, 'android', 'app', 'src', 'main', 'AndroidManifest.xml');
 const assets = ['app.js', 'icon.svg', 'index.html', 'manifest.webmanifest', 'privacy.html', 'styles.css', 'sw.js'];
 const androidPluginMarkerUrl = 'https://dl.google.com/dl/android/maven2/com/android/application/com.android.application.gradle.plugin/8.5.2/com.android.application.gradle.plugin-8.5.2.pom';
 
@@ -34,13 +35,14 @@ for (const asset of assets) {
   await access(resolve(web, asset));
 }
 
-const [html, manifest, serviceWorker, androidActivity, androidBuild, androidProperties] = await Promise.all([
+const [html, manifest, serviceWorker, androidActivity, androidBuild, androidProperties, androidManifest] = await Promise.all([
   readFile(resolve(web, 'index.html'), 'utf8'),
   readFile(resolve(web, 'manifest.webmanifest'), 'utf8'),
   readFile(resolve(web, 'sw.js'), 'utf8'),
   readFile(androidActivityPath, 'utf8'),
   readFile(androidBuildPath, 'utf8'),
   readFile(androidPropertiesPath, 'utf8'),
+  readFile(androidManifestPath, 'utf8'),
 ]);
 
 for (const asset of assets.filter(asset => asset !== 'sw.js')) {
@@ -89,6 +91,7 @@ for (const requiredAndroidAssetLoaderFeature of [
   'setAllowContentAccess(false)',
   'setAllowFileAccessFromFileURLs(false)',
   'setAllowUniversalAccessFromFileURLs(false)',
+  'setBlockNetworkLoads(true)',
 ]) {
   const source = requiredAndroidAssetLoaderFeature.startsWith('androidx.webkit:')
     ? androidBuild
@@ -104,6 +107,20 @@ if (!/^android\.useAndroidX=true$/m.test(androidProperties)) {
 
 if (androidActivity.includes('file:///android_asset')) {
   throw new Error('The Android shell must not load app content from a file:// origin.');
+}
+
+if (!androidActivity.includes('WebViewAssetLoader.DEFAULT_DOMAIN')
+    || !androidActivity.includes('.addPathHandler("/assets/"')
+    || !androidActivity.includes('APP_ASSET_PATH + "index.html"')) {
+  throw new Error('The Android shell must load its entry point from the WebViewAssetLoader HTTPS origin.');
+}
+
+if (/android\.permission\.INTERNET/.test(androidManifest)) {
+  throw new Error('The offline Android shell must not request INTERNET permission.');
+}
+
+if (!/android:usesCleartextTraffic="false"/.test(androidManifest)) {
+  throw new Error('The Android shell must explicitly reject cleartext traffic.');
 }
 
 await assertAndroidRepositoryReachable();
